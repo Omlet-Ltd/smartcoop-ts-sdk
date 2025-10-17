@@ -110,6 +110,8 @@ export function createOmletType(type: OmletType, data: any): any {
                 connectivity: createOmletType(OmletType.STATE_CONNECTIVITY, data.connectivity),
                 door: createOmletType(OmletType.STATE_DOOR, data.door),
                 light: createOmletType(OmletType.STATE_LIGHT, data.light),
+                feeder: createOmletType(OmletType.STATE_FEEDER, data.feeder),
+                fan: createOmletType(OmletType.STATE_FAN, data.fan),
             } as State;
         case OmletType.STATE_GENERAL:
             return {
