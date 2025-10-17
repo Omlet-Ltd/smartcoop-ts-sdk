@@ -15,6 +15,10 @@ import {GroupUser} from "../types/group.user";
 import {GroupSubset} from "../types/group.subset";
 import {Group} from "../types/group";
 import {User} from "../types/user";
+import { ConfigurationFeeder } from '../types/configuration.feeder';
+import { ConfigurationFan } from '../types/configuration.fan';
+import { StateFeeder } from '../types/state.feeder';
+import { StateFan } from '../types/state.fan';
 
 export function createOmletType(type: OmletType, data: any): any {
     switch (type) {
@@ -24,6 +28,8 @@ export function createOmletType(type: OmletType, data: any): any {
                 connectivity: createOmletType(OmletType.CONFIGURATION_CONNECTIVITY, data.connectivity),
                 door: createOmletType(OmletType.CONFIGURATION_DOOR, data.door),
                 light: createOmletType(OmletType.CONFIGURATION_LIGHT, data.light),
+                feeder: createOmletType(OmletType.CONFIGURATION_FEEDER, data.feeder),
+                fan: createOmletType(OmletType.CONFIGURATION_FAN, data.fan),
             } as Configuration;
         case OmletType.CONFIGURATION_GENERAL:
             return {
@@ -63,6 +69,41 @@ export function createOmletType(type: OmletType, data: any): any {
                 maxOnTime: data.maxOnTime,
                 equipped: data.equipped,
             } as ConfigurationLight;
+        case OmletType.CONFIGURATION_FEEDER:
+            return {
+                mode: data.mode,
+                openLightLevel: data.openLightLevel,
+                closeLightLevel: data.closeLightLevel,
+                openTime1: data.openTime1,
+                openTime2: data.openTime2,
+                openTime3: data.openTime3,
+                openTime4: data.openTime4,
+                closeTime1: data.closeTime1,
+                closeTime2: data.closeTime2,
+                closeTime3: data.closeTime3,
+                closeTime4: data.closeTime4,
+                colour: data.colour,
+            } as ConfigurationFeeder;
+        case OmletType.CONFIGURATION_FAN:
+            return {
+                mode: data.mode,
+                manualSpeed: data.manualSpeed,
+                timeOn1: data.timeOn1,
+                timeOn2: data.timeOn2,
+                timeOn3: data.timeOn3,
+                timeOn4: data.timeOn4,
+                timeOff1: data.timeOff1,
+                timeOff2: data.timeOff2,
+                timeOff3: data.timeOff3,
+                timeOff4: data.timeOff4,
+                timeSpeed1: data.timeSpeed1,
+                timeSpeed2: data.timeSpeed2,
+                timeSpeed3: data.timeSpeed3,
+                timeSpeed4: data.timeSpeed4,
+                tempOn: data.tempOn,
+                tempOff: data.tempOff,
+                tempSpeed: data.tempSpeed,
+            } as ConfigurationFan
         case OmletType.STATE:
             return {
                 general: createOmletType(OmletType.STATE_GENERAL, data.general),
@@ -98,6 +139,22 @@ export function createOmletType(type: OmletType, data: any): any {
             return {
                 state: data.state,
             } as StateLight;
+        case OmletType.STATE_FEEDER:
+            return {
+                state: data.state,
+                lastOpenTime: data.lastOpenTime,
+                lastCloseTime: data.lastCloseTime,
+                fault: data.fault,
+                lightLevel: data.lightLevel,
+                feedLevel: data.feedLevel,
+                mode: data.mode,
+            } as StateFeeder;
+        case OmletType.STATE_FAN:
+            return {
+                state: data.state,
+                temperature: data.temperature,
+                humidity: data.humidity,
+            } as StateFan;
         case OmletType.DEVICE:
             return {
                 deviceId: data.deviceId,
